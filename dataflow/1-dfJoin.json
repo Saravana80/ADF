@@ -5,6 +5,10 @@
 		"typeProperties": {
 			"sources": [
 				{
+					"dataset": {
+						"referenceName": "dsInputEmployees",
+						"type": "DatasetReference"
+					},
 					"name": "source1"
 				},
 				{
@@ -29,7 +33,7 @@
 					"name": "Join1"
 				}
 			],
-			"script": "parameters{\n\tFilename as string,\n\tDirectory as string\n}\nsource(allowSchemaDrift: true,\n\tvalidateSchema: false) ~> source1\nsource(output(\n\t\tDEPARTMENT_ID as string,\n\t\tDEPARTMENT_NAME as string,\n\t\tMANAGER_ID as string,\n\t\tLOCATION_ID as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> source2\nsource1, source2 join(source1@DEPARTMENT_ID == source2@DEPARTMENT_ID,\n\tjoinType:'inner',\n\tbroadcast: 'auto')~> Join1\nJoin1 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:['Employees-inner-join-depatments.csv'],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> sink1"
+			"script": "parameters{\n\tFilename as string,\n\tDirectory as string\n}\nsource(output(\n\t\tEMPLOYEE_ID as string,\n\t\tFIRST_NAME as string,\n\t\tLAST_NAME as string,\n\t\tEMAIL as string,\n\t\tPHONE_NUMBER as string,\n\t\tHIRE_DATE as string,\n\t\tJOB_ID as string,\n\t\tSALARY as string,\n\t\tCOMMISSION_PCT as string,\n\t\tMANAGER_ID as string,\n\t\tDEPARTMENT_ID as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> source1\nsource(output(\n\t\tDEPARTMENT_ID as string,\n\t\tDEPARTMENT_NAME as string,\n\t\tMANAGER_ID as string,\n\t\tLOCATION_ID as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> source2\nsource1, source2 join(source1@DEPARTMENT_ID == source2@DEPARTMENT_ID,\n\tjoinType:'inner',\n\tbroadcast: 'auto')~> Join1\nJoin1 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:['Employees-inner-join-depatments.csv'],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> sink1"
 		}
 	}
 }
