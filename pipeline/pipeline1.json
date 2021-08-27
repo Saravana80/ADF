@@ -20,11 +20,7 @@
 						"type": "DataFlowReference"
 					},
 					"staging": {
-						"linkedService": {
-							"referenceName": "lsOut",
-							"type": "LinkedServiceReference"
-						},
-						"folderPath": "output"
+						"folderPath": ""
 					},
 					"compute": {
 						"coreCount": 8,
