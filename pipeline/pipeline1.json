@@ -19,6 +19,13 @@
 						"referenceName": "1-dfJoin",
 						"type": "DataFlowReference"
 					},
+					"staging": {
+						"linkedService": {
+							"referenceName": "lsOut",
+							"type": "LinkedServiceReference"
+						},
+						"folderPath": "output"
+					},
 					"compute": {
 						"coreCount": 8,
 						"computeType": "General"
